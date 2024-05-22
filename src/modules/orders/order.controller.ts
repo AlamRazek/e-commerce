@@ -25,7 +25,7 @@ const getAllOrders = async (req: Request, res: Response) => {
       message: "Products fetched successfully!",
       data: result,
     });
-  } catch (err: any) {
+  } catch (err: unknown) {
     res.status(500).json({
       success: false,
       message: "Product could not fetch",

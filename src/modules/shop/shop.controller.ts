@@ -26,7 +26,7 @@ const getAllProduct = async (req: Request, res: Response) => {
       message: "Products fetched successfully!",
       data: result,
     });
-  } catch (err: any) {
+  } catch (err: unknown) {
     res.status(500).json({
       success: false,
       message: "Product could not fetch",
@@ -44,7 +44,7 @@ const getSingleProduct = async (req: Request, res: Response) => {
       message: "Product fetched successfully!",
       data: result,
     });
-  } catch (err: any) {
+  } catch (err: unknown) {
     res.status(500).json({
       success: false,
       message: "Product could not fetch",
@@ -64,7 +64,7 @@ const getUpdateProduct = async (req: Request, res: Response) => {
       message: "Product updated successfully!",
       data: result,
     });
-  } catch (err: any) {
+  } catch (err: unknown) {
     res.status(500).json({
       success: false,
       message: "Product could not updated",
@@ -82,7 +82,7 @@ const deleteSingleProduct = async (req: Request, res: Response) => {
       message: "Product deleted successfully!",
       data: result,
     });
-  } catch (err: any) {
+  } catch (err: unknown) {
     res.status(500).json({
       success: false,
       message: "Product could not deleted",
