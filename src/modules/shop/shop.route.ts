@@ -1,15 +1,11 @@
 import express, { Request, Response } from "express";
-import { ShopModel } from "./shop.model";
+
+import { ShopControllers } from "./shop.controller";
 
 const router = express.Router();
 
-router.post("/", async (req: Request, res: Response) => {
-  const result = await ShopModel.create(req.body);
-  res.json({
-    success: true,
-    message: "Product ia added successfully",
-    data: result,
-  });
-});
+router.post("/", ShopControllers.createProduct);
+router.get("/", ShopControllers.getAllProduct);
+router.get("/:productId", ShopControllers.getSingleProduct);
 
 export const ShopRoutes = router;
