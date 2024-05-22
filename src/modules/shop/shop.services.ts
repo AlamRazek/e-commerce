@@ -17,8 +17,8 @@ const getAllProducts = async (searchTerm?: string) => {
 
   return result;
 };
-const getOneProduct = async (id: string) => {
-  const result = await ShopModel.findById(id).exec();
+const getOneProduct = async (productId: string) => {
+  const result = await ShopModel.findById(productId).exec();
 
   return result;
 };

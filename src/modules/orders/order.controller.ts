@@ -1,9 +1,13 @@
 import { Request, Response } from "express";
 import { OrderServices } from "./order.service";
+import orderValidationSchema from "./orders.validation";
 
 const createOrder = async (req: Request, res: Response) => {
   const orderItem = req.body;
-  const result = await OrderServices.createOrderPayload(orderItem);
+
+  const zodParsedData = orderValidationSchema.parse(orderItem);
+
+  const result = await OrderServices.createOrderPayload(zodParsedData);
   res.status(200).json({
     success: true,
     message: "Order created successfully!",
@@ -13,9 +17,9 @@ const createOrder = async (req: Request, res: Response) => {
 
 const getAllOrders = async (req: Request, res: Response) => {
   try {
-    const { searchTerm } = req.query;
+    const { email } = req.query;
 
-    const result = await OrderServices.getAllOrders(searchTerm?.toString());
+    const result = await OrderServices.getAllOrders(email?.toString());
     res.status(200).json({
       success: true,
       message: "Products fetched successfully!",

@@ -6,11 +6,11 @@ const createOrderPayload = async (payload: Order) => {
   return result;
 };
 
-const getAllOrders = async (searchTerm?: string) => {
+const getAllOrders = async (email?: string) => {
   let result;
-  if (searchTerm && typeof searchTerm === "string") {
+  if (email && typeof email === "string") {
     result = await OrderModel.find({
-      email: { $regex: new RegExp(searchTerm, "i") },
+      email: { $regex: new RegExp(email, "i") },
     });
   } else {
     result = await OrderModel.find();
