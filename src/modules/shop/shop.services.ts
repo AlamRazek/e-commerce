@@ -11,7 +11,13 @@ const getAllProducts = async () => {
 };
 const getOneProduct = async (id: string) => {
   const result = await ShopModel.findById(id).exec();
-  console.log(result);
+
+  return result;
+};
+const updateOneProduct = async (id: string, update: Shop) => {
+  const result = await ShopModel.findByIdAndUpdate(id, update, {
+    new: true,
+  }).exec();
 
   return result;
 };
@@ -20,4 +26,5 @@ export const ShopServices = {
   createProductPayload,
   getAllProducts,
   getOneProduct,
+  updateOneProduct,
 };

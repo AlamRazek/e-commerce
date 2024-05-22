@@ -6,7 +6,7 @@ const createProduct = async (req: Request, res: Response) => {
   const result = await ShopServices.createProductPayload(shopProduct);
   res.json({
     success: true,
-    message: "Product ia added successfully",
+    message: "Product created successfully!",
     data: result,
   });
 };
@@ -16,7 +16,7 @@ const getAllProduct = async (req: Request, res: Response) => {
     const result = await ShopServices.getAllProducts();
     res.json({
       success: true,
-      message: "Product are fetched successfully",
+      message: "Products fetched successfully!",
       data: result,
     });
   } catch (err: any) {
@@ -34,7 +34,7 @@ const getSingleProduct = async (req: Request, res: Response) => {
 
     res.json({
       success: true,
-      message: "Product is fetched successfully",
+      message: "Product fetched successfully!",
       data: result,
     });
   } catch (err: any) {
@@ -45,9 +45,30 @@ const getSingleProduct = async (req: Request, res: Response) => {
     });
   }
 };
+const getUpdateProduct = async (req: Request, res: Response) => {
+  try {
+    const { productId } = req.params;
+    const updatedData = req.body;
+
+    const result = await ShopServices.updateOneProduct(productId, updatedData);
+
+    res.json({
+      success: true,
+      message: "Product updated successfully!",
+      data: result,
+    });
+  } catch (err: any) {
+    res.json({
+      success: false,
+      message: "Product could not updated",
+      error: err,
+    });
+  }
+};
 
 export const ShopControllers = {
   createProduct,
   getAllProduct,
   getSingleProduct,
+  getUpdateProduct,
 };
