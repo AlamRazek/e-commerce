@@ -8,24 +8,26 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const mongoose_1 = __importDefault(require("mongoose"));
-const app_1 = __importDefault(require("./app"));
-const config_1 = __importDefault(require("./config"));
-function main() {
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            yield mongoose_1.default.connect(config_1.default.db_url);
-            app_1.default.listen(config_1.default.port, () => {
-                console.log(`Example app listening on port ${config_1.default.port}`);
-            });
-        }
-        catch (err) {
-            console.log(err);
-        }
-    });
-}
-main();
+exports.OrderServices = void 0;
+const order_model_1 = require("./order.model");
+const createOrderPayload = (payload) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield order_model_1.OrderModel.create(payload);
+    return result;
+});
+const getAllOrders = (email) => __awaiter(void 0, void 0, void 0, function* () {
+    let result;
+    if (email && typeof email === "string") {
+        result = yield order_model_1.OrderModel.find({
+            email: { $regex: new RegExp(email, "i") },
+        });
+    }
+    else {
+        result = yield order_model_1.OrderModel.find();
+    }
+    return result;
+});
+exports.OrderServices = {
+    createOrderPayload,
+    getAllOrders,
+};
